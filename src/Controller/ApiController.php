@@ -63,6 +63,56 @@ class ApiController extends AbstractController
 
     }
 
+    /**
+     * @Route("/movie/{id}", name="one_movie")
+     */
+    public function OneMovie($id, RequestStack $requestStack)
+    {
+        $request = $requestStack->getMainRequest();
+        $url = "https://api.themoviedb.org/3/";
+        $api = "5ebe0843b2e373ffa159f5683b21b7de";
+
+
+        $lang = "fr-FR";
+
+
+        $url = $url ."movie/" . $id . "?api_key=" .$api. "&language=". $lang;
+        $response = $this->client->request(
+            'GET',
+            $url
+        );
+        $result = json_decode($response->getContent(), true);
+
+        return $this->render('api/one_result.html.twig', [
+            "result" => $result
+        ]);
+    }
+
+    /**
+     * @Route("/person/{id}", name="one_celeb")
+     */
+    public function Onecelebrity($id, RequestStack $requestStack)
+    {
+        $request = $requestStack->getMainRequest();
+        $url = "https://api.themoviedb.org/3/";
+        $api = "5ebe0843b2e373ffa159f5683b21b7de";
+
+
+        $lang = "fr-FR";
+
+
+        $url = $url ."person/" . $id . "?api_key=" .$api. "&language=". $lang;
+        $response = $this->client->request(
+            'GET',
+            $url
+        );
+        $result = json_decode($response->getContent(), true);
+
+        return $this->render('api/one_celeb.html.twig', [
+            "result" => $result
+        ]);
+    }
+
 
 
 }
