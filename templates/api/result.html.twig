@@ -1,0 +1,13 @@
+<div>
+{% for result in results %}
+    {% if result.name is defined %}
+        <a href="/movies/{{ result.id }}"> {{ result.name }}</a>
+    <p>{{ result.name }}</p>
+    <p>{{ result.popularity }}</p>
+    {% else %}
+    <p>{{ result.title }}</p>
+    <p>{{ result.overview }}</p>
+    <p>{{ result.vote_average }}</p>
+{% endif %}
+    {% endfor %}
+</div>
