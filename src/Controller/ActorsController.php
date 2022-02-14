@@ -76,4 +76,17 @@ class ActorsController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/delete-actor/{id}", name="delete_actor")
+     */
+    public function deleteProduct(int $id, ManagerRegistry $doctrine): Response
+    {
+        $entityManager = $doctrine->getManager();
+        $actor = $entityManager->getRepository(Actor::class)->find($id);
+        $entityManager->remove($actor);
+        $entityManager->flush();
+        $this->addFlash('success', 'Article Created! Knowledge is power!');
+        return $this->redirectToRoute("list_movies");
+    }
+
 }

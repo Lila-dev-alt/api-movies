@@ -13,5 +13,6 @@
 {{ actor.id }}.
 {{ actor.name}}
  id :   {{ actor.idTheMovieDb }}
+    <a class="btn btn-primary" href="{{ path('delete_actor', {'id': actor.id}) }}">Supprimer</a>
     <br>
 {% endfor %}
