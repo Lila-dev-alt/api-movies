@@ -1,5 +1,16 @@
-Wish list de Films :
+<h1>Wish list de Films : </h1>
+<br>
 {% for wish_movie in wish_movies %}
-    {{ wish_movie.id }}
+    {{ wish_movie.id }}.
     {{ wish_movie.name }}
+    <br>
+{% endfor %}
+
+<h1>listes d'acteurs : </h1>
+<br>
+{% for actor in actors %}
+{{ actor.id }}.
+{{ actor.name}}
+ id :   {{ actor.idTheMovieDb }}
+    <br>
 {% endfor %}

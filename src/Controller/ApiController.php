@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Actor;
 use App\Entity\WishMovie;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -122,9 +123,11 @@ class ApiController extends AbstractController
     {
 
         $wishMovies = $doctrine->getRepository(WishMovie::class)->findAll();
+        $actors = $doctrine->getRepository(Actor::class)->findAll();
 
         return $this->render('api/wish_movies.html.twig', [
-            "wish_movies" => $wishMovies
+            "wish_movies" => $wishMovies,
+            "actors" => $actors
         ]);
 
 
@@ -156,6 +159,40 @@ class ApiController extends AbstractController
         $wishMovie->setIdTheMovieDb($id);
         $wishMovie->setName($resultName);
         $entityManager->persist($wishMovie);
+
+        $entityManager->flush();
+
+        return $this->redirectToRoute('list_movies');
+
+
+    }
+
+    /**
+     * @Route("/add-actor/{id}", name="add_actor")
+     */
+    public function AddtoWishActors($id, ManagerRegistry $doctrine, RequestStack $requestStack)
+    {
+        $request = $requestStack->getMainRequest();
+        $url = "https://api.themoviedb.org/3/";
+        $api = "5ebe0843b2e373ffa159f5683b21b7de";
+
+
+        $lang = "fr-FR";
+
+
+        $url = $url ."person/" . $id . "?api_key=" .$api. "&language=". $lang;
+        $response = $this->client->request(
+            'GET',
+            $url
+        );
+        $result = json_decode($response->getContent(), true);
+        $resultName = $result['name'];
+        $entityManager = $doctrine->getManager();
+        $actor = new Actor();
+        $actor->setName($resultName);
+        $actor->setIdTheMovieDb($result['id']);
+        $actor->setDate(new \DateTime());
+        $entityManager->persist($actor);
 
         $entityManager->flush();
 
