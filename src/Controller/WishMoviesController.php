@@ -52,5 +52,17 @@ class WishMoviesController extends AbstractController
 
 
     }
+    /**
+     * @Route("/delete-movie/{id}", name="delete_movie")
+     */
+    public function deleteProduct(int $id, ManagerRegistry $doctrine): Response
+    {
+        $entityManager = $doctrine->getManager();
+        $wishMovie = $entityManager->getRepository(WishMovie::class)->find($id);
+        $entityManager->remove($wishMovie);
+        $entityManager->flush();
+
+        return $this->redirectToRoute("list_movies");
+    }
 
 }

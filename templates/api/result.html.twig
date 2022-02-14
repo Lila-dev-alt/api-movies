@@ -1,13 +1,17 @@
-<div>
+
 {% for result in results %}
     {% if result.name is defined %}
+<div class="result">
         <a href="{{ path('one_celeb', {'id': result['id']}) }}"> {{ result.name }}</a>
     <p>{{ result.name }}</p>
     <p>{{ result.popularity }}</p>
+</div>
     {% else %}
+<div class="result">
         <a href="{{ path('one_movie', {'id': result['id']}) }}"> {{ result.title }}</a>
     <p>{{ result.overview }}</p>
     <p>{{ result.vote_average }}</p>
+</div>
 {% endif %}
     {% endfor %}
-</div>
+
