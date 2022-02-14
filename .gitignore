@@ -18,3 +18,8 @@
 /phpunit.xml
 .phpunit.result.cache
 ###< phpunit/phpunit ###
+
+/.DS_Store
+/.DS_Store/
+src/.DS_Store
+templates/.DS_Store
