@@ -16,8 +16,18 @@
     </head>
     <body>
         {% block body %}
-        <a href="{{ path('login') }}" > Login</a>
-            <a href="{{ path('app_logout') }}" > Logout</a>
+            {% for flash_message in app.session.flashBag.get('info') %}
+                <div class="flash-notice">
+                    {{ flash_message }}
+                </div>
+            {% endfor %}
+
+            {% if is_granted('ROLE_USER') %}
+                <a class="btn btn-primary" href="{{ path('app_logout') }}" > Logout</a>
+            {% else %}
+            <a class="btn btn-primary"  href="{{ path('login') }}" > Login</a>
+            {% endif %}
+
         {% endblock %}
     </body>
 </html>
