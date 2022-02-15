@@ -1,3 +1,6 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {{ parent() }}
 <h1>Wish list de Films : </h1>
 <br>
 {% for wish_movie in wish_movies %}
@@ -16,3 +19,5 @@
     <a class="btn btn-primary" href="{{ path('delete_actor', {'id': actor.id}) }}">Supprimer</a>
     <br>
 {% endfor %}
+
+{% endblock %}
