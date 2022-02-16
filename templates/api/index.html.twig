@@ -11,13 +11,13 @@
 
 <div class="example-wrapper">
 <form action="{{ url('search') }}" method="GET">
-    <input type="text" name="value">
+    <input class="search" type="text" name="value">
     <select class="select" name="category">
         <option value="movie">Films</option>
         <option value="person">Celebrites</option>
         <option value="tv">Series</option>
     </select>
-    <button> Submit</button>
+    <button class="button"> Submit</button>
 </form>
 </div>
 {% endblock %}
